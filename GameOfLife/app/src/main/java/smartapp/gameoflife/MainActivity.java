@@ -1,6 +1,8 @@
 package smartapp.gameoflife;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button resetButton = (Button) findViewById(R.id.reset);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -35,16 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(MainActivity.class.getName(), "device width:" + width);
 
-//        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.parent_lyt);
-//        LinearLayout.LayoutParams params = new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-//        for (int i = 0; i < 12; i++) {
-//            Button button = new Button(this);
-//            button.setFitsSystemWindows(true);
-//            button.setTag(i);
-//            button.setOnClickListener(mOnClickListener);
-//            button.setLayoutParams(params);
-//            linearLayout.addView(button);
-//        }
 
         int totalMargin = LIFE_SIZE * (HORIZONTAL_MARGIN * 2);
         final GridLayout gridLayout = (GridLayout) findViewById(R.id.gridFrameOfGame);
@@ -65,6 +59,31 @@ public class MainActivity extends AppCompatActivity {
             button.setOnClickListener(mOnClickListener);
             gridLayout.addView(button);
         }
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Reset Frame")
+                        .setMessage("Are you sure you want to reset this frame?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 1; i <= (LIFE_SIZE * LIFE_SIZE); i++) {
+                                    Button tempButton = (Button) findViewById(i+1-1);
+                                    tempButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.background_light));
+                                }
+                                alive.clear();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -91,4 +110,6 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d(MainActivity.class.getName()+ "ID", String.valueOf(v.getId()));
         }
     };
+
+
 }
