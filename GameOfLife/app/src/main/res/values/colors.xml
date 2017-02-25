@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bootStrapDanger">#d9534f</color>
+    <color name="bootStrapSuccess">#5cb85c</color>
+    <color name="bootStrapInfo">#5bc0de</color>
+    <color name="bootStrapWarning">#f0ad4e</color>
 </resources>

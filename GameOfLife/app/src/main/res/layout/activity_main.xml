@@ -15,14 +15,47 @@
     <!--android:id="@+id/gridFrameOfGame">-->
 
     <!--</GridView>-->
-
-    <GridLayout
-        android:id="@+id/parent_lyt"
-        android:columnCount="12"
-        android:rowCount="12"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </GridLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <GridLayout
+                android:id="@+id/gridFrameOfGame"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </GridLayout>
+
+        </HorizontalScrollView>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20px">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reset"
+            android:background="@color/bootStrapDanger"
+            android:text="RESET"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/reset"
+            android:layout_marginLeft="70px"
+            android:background="@color/bootStrapSuccess"
+            android:text="NEXT"/>
+    </RelativeLayout>
 
     <!--<LinearLayout-->
         <!--android:weightSum="12"-->
