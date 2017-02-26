@@ -21,7 +21,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<RectangleObject> rectangles = new ArrayList<RectangleObject>();
     ArrayList<Integer> alive = new ArrayList<Integer>();
 
     final int LIFE_SIZE = 12;
