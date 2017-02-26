@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     final int HORIZONTAL_MARGIN = 2;
     final int VERTICAL_MARGIN = 2;
     Boolean playFlag = false;
+//    Timer time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Button resetButton = (Button) findViewById(R.id.reset);
         Button nextButton = (Button) findViewById(R.id.next);
@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 1; i <= (LIFE_SIZE * LIFE_SIZE); i++) {
                                     Button tempButton = (Button) findViewById(i+1-1);
                                     tempButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.background_light));
+//                                    time.cancel();
+//                                    time.purge();
                                 }
                                 alive.clear();
                             }
@@ -112,16 +114,39 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            Timer time = new Timer();
+            //Change button text to play and pause
+            new Handler(getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Button playButton = (Button) findViewById(R.id.play);
+                    String playButtonText = (String) playButton.getText();
+                    Log.d(MainActivity.class.getName()+" Play Button String", playButtonText);
+                    if(playButtonText.equals("Play")){
+                        playButton.setText("Pause");
+                        playFlag = true;
+                    }else{
+                        playButton.setText("Play");
+                        playFlag = false;
+                    }
+                }
+            });
+
+            //Change UI to next generation continuously
+            final Timer time = new Timer();
             time.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     new Handler(getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            ArrayList<Integer> tempAlive = newAlive();
-                            alive.clear();
-                            alive = new ArrayList<Integer>(tempAlive);
+                            if(playFlag) {
+                                ArrayList<Integer> tempAlive = newAlive();
+                                alive.clear();
+                                alive = new ArrayList<Integer>(tempAlive);
+                            }else{
+                                time.cancel();
+                                time.purge();
+                            }
                         }
                     });
                 }
