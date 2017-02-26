@@ -52,9 +52,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/reset"
-            android:layout_marginLeft="70px"
+            android:layout_marginLeft="50px"
             android:background="@color/bootStrapSuccess"
+            android:id="@+id/next"
             android:text="NEXT"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/next"
+            android:layout_marginLeft="50px"
+            android:background="@color/bootStrapWarning"
+            android:text="Play"
+            android:id="@+id/play"/>
+
     </RelativeLayout>
 
     <!--<LinearLayout-->
