@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     final int HORIZONTAL_MARGIN = 2;
     final int VERTICAL_MARGIN = 2;
     Boolean playFlag = false;
+    int count = 0;
+    TextView countView;
 //    Timer time;
 
     @Override
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Button nextButton = (Button) findViewById(R.id.next);
         Button playButton = (Button) findViewById(R.id.play);
 
+        countView =  (TextView) findViewById(R.id.count);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(MainActivity.class.getName(), "device width:" + width);
 
 
+        countView.setText(String.valueOf(count));
         int totalMargin = LIFE_SIZE * (HORIZONTAL_MARGIN * 2);
         final GridLayout gridLayout = (GridLayout) findViewById(R.id.gridFrameOfGame);
         gridLayout.setColumnCount(LIFE_SIZE);
@@ -78,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 1; i <= (LIFE_SIZE * LIFE_SIZE); i++) {
                                     Button tempButton = (Button) findViewById(i+1-1);
                                     tempButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.background_light));
+                                    count = 0;
+                                    TextView countView =  (TextView) findViewById(R.id.count);
+                                    countView.setText(String.valueOf(count));
 //                                    time.cancel();
 //                                    time.purge();
                                 }
@@ -216,6 +225,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+        count++;
+        TextView countView =  (TextView) findViewById(R.id.count);
+        countView.setText(String.valueOf(count));
 
         return newAlive;
     }
